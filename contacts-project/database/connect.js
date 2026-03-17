@@ -1,0 +1,25 @@
+const dns = require("node:dns");
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
+const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
+dotenv.config();
+
+let _db;
+
+const initDb = (callback) => {
+  if (_db) return callback(null, _db);
+  MongoClient.connect(process.env.MONGODB_URI)
+    .then((client) => {
+      _db = client;
+      callback(null, _db);
+    })
+    .catch((err) => callback(err));
+};
+
+const getDb = () => {
+  if (!_db) throw Error('Db not initialized');
+  return _db;
+};
+
+module.exports = { initDb, getDb };
