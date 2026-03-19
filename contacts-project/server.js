@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const mongodb = require('./database/connect');
-const app = express();
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
+dotenv.config();
+
+const app = express();
 const port = process.env.PORT || 8080;
 
 app
@@ -10,10 +13,12 @@ app
   .use(express.json())
   .use('/', require('./routes'));
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port, () => console.log(`Connected to DB and listening on ${port}`));
-  }
-});
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Connected to DB and listening on ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error(`Error connecting to DB: ${err}`);
+  });
