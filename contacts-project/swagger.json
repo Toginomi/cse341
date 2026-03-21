@@ -5,10 +5,10 @@
     "description": "Documentation for Team Project - Week 3",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "contacts-project-8bnx.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/contacts/": {

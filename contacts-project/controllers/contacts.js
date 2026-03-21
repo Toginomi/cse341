@@ -42,22 +42,20 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   // #swagger.summary = 'Update a contact by ID'
-  const userId = new ObjectId(req.params.id);
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
-  };
   try {
-    const response = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true }, { runValidators: true });
+    const response = await Contact.findByIdAndUpdate(
+      req.params.id, 
+      req.body, 
+      { new: true, runValidators: true } 
+    );
+
     if (!response) {
       return res.status(404).json({ message: 'Contact not found' });
     }
-    res.status(204).send();
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(204).send(); 
+    } catch (err) {
+      console.log("FULL ERROR LOG:", err);
+      res.status(500).json({ message: err.message });
   }
 };
 
