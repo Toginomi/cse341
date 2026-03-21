@@ -1,10 +1,12 @@
+### --- LOCALHOST TESTS ---
+
 ### GET ALL CONTACTS
 GET http://localhost:8080/contacts
 
 
 ### GET CONTACT BY ID
-# Replace the ID below with a real ID from your MongoDB collection
-GET http://localhost:8080/contacts/65f2c4198765432101234567
+# Replace the ID below with a real ID from the MongoDB collection
+GET http://localhost:8080/contacts/69b9072b91cd66c17286a1b2
 
 
 ### CREATE CONTACT
@@ -16,13 +18,13 @@ Content-Type: application/json
     "lastName": "Hall",
     "email": "ahall@test.com",
     "favoriteColor": "Blue",
-    "birthday": "02/12/1956"
+    "birthday": "1956-02-12"
 }
 
 
 ### UPDATE CONTACT
 # Replace the ID below with the ID returned from the POST request above
-PUT http://localhost:8080/contacts/65f2c4198765432101234567 HTTP/1.1
+PUT http://localhost:8080/contacts/69b9072b91cd66c17286a1b2 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -30,16 +32,33 @@ Content-Type: application/json
     "lastName": "Hall",
     "email": "arsenio.hall@newmail.com",
     "favoriteColor": "Purple",
-    "birthday": "02/12/1956"
+    "birthday": "1956-02-12"
 }
 
 
 ### DELETE CONTACT
 # Replace the ID below with a real ID you want to remove
-DELETE http://localhost:8080/contacts/65f2c4198765432101234567 HTTP/1.1
+DELETE http://localhost:8080/contacts/69b9072b91cd66c17286a1b2 HTTP/1.1
 
 
 # --- RENDER LINKS ---
 
 ### GET ALL CONTACTS (RENDER)
-GET https://your-app-name.onrender.com/contacts
+GET https://contacts-project-8bnx.onrender.com/contacts
+
+
+### GET CONTACT BY ID (RENDER)
+GET https://contacts-project-8bnx.onrender.com/contacts/69b9072b91cd66c17286a1b2
+
+
+### CREATE CONTACT (RENDER)
+POST https://contacts-project-8bnx.onrender.com/contacts HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Rudy",
+    "lastName": "Test",
+    "email": "rudy@test.com",
+    "favoriteColor": "Green",
+    "birthday": "1990-01-01"
+}

@@ -17,7 +17,14 @@ router.get('/', contactsController.getAll);
 router.get('/:id', validateId, contactsController.getSingle);
 
 // POST - Create a new contact
-router.post('/', contactsController.createContact);
+router.post('/',
+    validateFirstName, 
+    validateLastName, 
+    validateEmail, 
+    validateFavoriteColor, 
+    validateBirthday, 
+    contactsController.createContact
+);
 
 // PUT - Update a contact by ID
 router.put('/:id', 
