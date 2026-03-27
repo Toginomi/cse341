@@ -1,5 +1,7 @@
 const router = require('express').Router();
-router.use('/api-docs', require('./swagger'));
+
+router.use('/', require('./swagger'));
 router.use('/students', require('./students'));
+router.use('/courses', require('./courses'));
 
 module.exports = router;

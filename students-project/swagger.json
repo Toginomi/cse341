@@ -1,17 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "TYS Scholar API",
-    "description": "Management for PSHS Prep Students",
+    "title": "Students API",
+    "description": "Management for Students (Students and Course Collections)",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
-    "/": {
+    "/api-docs": {
       "get": {
         "description": "",
         "responses": {
@@ -42,22 +43,28 @@
             "schema": {
               "type": "object",
               "properties": {
-                "studentName": {
+                "firstName": {
                   "example": "any"
                 },
-                "currentSchool": {
-                  "example": "any"
-                },
-                "parentGuardian": {
-                  "example": "any"
-                },
-                "parentContact": {
+                "lastName": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
-                "address": {
+                "age": {
+                  "example": "any"
+                },
+                "major": {
+                  "example": "any"
+                },
+                "gpa": {
+                  "example": "any"
+                },
+                "admissionDate": {
+                  "example": "any"
+                },
+                "totalCredits": {
                   "example": "any"
                 }
               }
@@ -115,22 +122,170 @@
             "schema": {
               "type": "object",
               "properties": {
-                "studentName": {
+                "firstName": {
                   "example": "any"
                 },
-                "currentSchool": {
-                  "example": "any"
-                },
-                "parentGuardian": {
-                  "example": "any"
-                },
-                "parentContact": {
+                "lastName": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
-                "address": {
+                "age": {
+                  "example": "any"
+                },
+                "major": {
+                  "example": "any"
+                },
+                "gpa": {
+                  "example": "any"
+                },
+                "admissionDate": {
+                  "example": "any"
+                },
+                "totalCredits": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/courses/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseCode": {
+                  "example": "any"
+                },
+                "courseName": {
+                  "example": "any"
+                },
+                "instructor": {
+                  "example": "any"
+                },
+                "credits": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseCode": {
+                  "example": "any"
+                },
+                "courseName": {
+                  "example": "any"
+                },
+                "instructor": {
+                  "example": "any"
+                },
+                "credits": {
                   "example": "any"
                 }
               }
@@ -180,37 +335,58 @@
     "Scholar": {
       "type": "object",
       "properties": {
-        "studentName": {
+        "firstName": {
           "type": "string",
-          "example": "Juan Dela Cruz"
+          "example": "Rudy"
         },
-        "currentSchool": {
+        "lastName": {
           "type": "string",
-          "example": "Quezon City Elem"
-        },
-        "parentGuardian": {
-          "type": "string",
-          "example": "Maria Dela Cruz"
-        },
-        "parentContact": {
-          "type": "string",
-          "example": "09123456789"
+          "example": "Pilande"
         },
         "email": {
           "type": "string",
-          "example": "juan@example.com"
+          "example": "rpilande@byupathway.edu"
         },
-        "address": {
-          "type": "string",
-          "example": "123 St. Manila"
+        "age": {
+          "type": "number",
+          "example": 23
         },
-        "studentFbLink": {
+        "major": {
           "type": "string",
-          "example": "fb.com/juan"
+          "example": "Software Development"
         },
-        "parentFbLink": {
+        "gpa": {
+          "type": "number",
+          "example": 3.8
+        },
+        "admissionDate": {
           "type": "string",
-          "example": "fb.com/maria"
+          "example": "2023-09-01"
+        },
+        "totalCredits": {
+          "type": "number",
+          "example": 96
+        }
+      }
+    },
+    "Course": {
+      "type": "object",
+      "properties": {
+        "courseCode": {
+          "type": "string",
+          "example": "CSE341"
+        },
+        "courseName": {
+          "type": "string",
+          "example": "Web Services"
+        },
+        "instructor": {
+          "type": "string",
+          "example": "Brother Snow"
+        },
+        "credits": {
+          "type": "number",
+          "example": 3
         }
       }
     }

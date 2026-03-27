@@ -1,52 +1,74 @@
-const student = require('../models/student');
+const Student = require('../models/student'); // Capitalized 'S' for the Model
 
+// GET all students
 const getAll = async (req, res) => {
   try {
-    const students = await student.find();
+    const students = await Student.find();
     res.status(200).json(students);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error retrieving students: ' + err.message });
   }
 };
 
+// GET single student by ID
 const getSingle = async (req, res) => {
   try {
-    const student = await student.findById(req.params.id);
-    if (!student) return res.status(404).json({ message: 'Student not found' });
-    res.status(200).json(student);
+    const result = await Student.findById(req.params.id); // Changed variable name to 'result'
+    if (!result) {
+      return res.status(404).json({ message: 'Student not found with that ID' });
+    }
+    res.status(200).json(result);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Invalid ID format or server error: ' + err.message });
   }
 };
 
+// CREATE new student
 const createStudent = async (req, res) => {
-  const student = new student(req.body);
   try {
-    const newStudent = await student.save();
-    res.status(201).json(newStudent);
+    // This will handle all 8 fields from your JSON: firstName, lastName, email, age, major, gpa, etc.
+    const newStudent = new Student(req.body); 
+    const savedStudent = await newStudent.save();
+    res.status(201).json(savedStudent);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: 'Validation failed: ' + err.message });
   }
 };
 
+// UPDATE student
 const updateStudent = async (req, res) => {
   try {
-    const updated = await student.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-    if (!updated) return res.status(404).json({ message: 'Student not found' });
-    res.status(204).send();
+    const updated = await Student.findByIdAndUpdate(
+      req.params.id, 
+      req.body, 
+      { new: true, runValidators: true }
+    );
+    if (!updated) {
+      return res.status(404).json({ message: 'Cannot update: Student not found' });
+    }
+    res.status(204).send(); // 204 No Content is standard for successful updates
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: 'Update failed: ' + err.message });
   }
 };
 
+// DELETE student
 const deleteStudent = async (req, res) => {
   try {
-    const deleted = await student.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ message: 'Student not found' });
-    res.status(204).send();
+    const deleted = await Student.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Cannot delete: Student not found' });
+    }
+    res.status(204).send(); // 204 No Content is standard for successful deletions
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Delete failed: ' + err.message });
   }
 };
 
-module.exports = { getAll, getSingle, createStudent, updateStudent, deleteStudent };
+module.exports = { 
+  getAll, 
+  getSingle, 
+  createStudent, 
+  updateStudent, 
+  deleteStudent 
+};
