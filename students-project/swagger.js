@@ -6,7 +6,7 @@ const doc = {
     description: 'Management for Students (Students and Course Collections)' 
   },
   host: 'students-project-wet9.onrender.com', 
-  schemes: ['http', 'https'],
+  schemes: ['https', 'http'],
   definitions: {
     Scholar: {
       firstName: "Rudy",
