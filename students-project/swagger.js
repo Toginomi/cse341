@@ -5,9 +5,7 @@ const doc = {
     title: 'Students API', 
     description: 'Management for Students (Students and Course Collections)' 
   },
-  // When you deploy, change this host to your Render URL (e.g., 'your-app.onrender.com')
-  // and add 'https' to schemes.
-  host: 'localhost:8080', 
+  host: 'students-project-wet9.onrender.com', 
   schemes: ['http', 'https'],
   definitions: {
     Scholar: {
