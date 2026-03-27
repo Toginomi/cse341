@@ -1,4 +1,4 @@
-const Student = require('../models/student'); // Capitalized 'S' for the Model
+const Student = require('../models/student');
 
 // GET all students
 const getAll = async (req, res) => {
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
 // GET single student by ID
 const getSingle = async (req, res) => {
   try {
-    const result = await Student.findById(req.params.id); // Changed variable name to 'result'
+    const result = await Student.findById(req.params.id);
     if (!result) {
       return res.status(404).json({ message: 'Student not found with that ID' });
     }
@@ -26,7 +26,6 @@ const getSingle = async (req, res) => {
 // CREATE new student
 const createStudent = async (req, res) => {
   try {
-    // This will handle all 8 fields from your JSON: firstName, lastName, email, age, major, gpa, etc.
     const newStudent = new Student(req.body); 
     const savedStudent = await newStudent.save();
     res.status(201).json(savedStudent);
@@ -46,7 +45,7 @@ const updateStudent = async (req, res) => {
     if (!updated) {
       return res.status(404).json({ message: 'Cannot update: Student not found' });
     }
-    res.status(204).send(); // 204 No Content is standard for successful updates
+    res.status(204).send();
   } catch (err) {
     res.status(400).json({ message: 'Update failed: ' + err.message });
   }
@@ -59,7 +58,7 @@ const deleteStudent = async (req, res) => {
     if (!deleted) {
       return res.status(404).json({ message: 'Cannot delete: Student not found' });
     }
-    res.status(204).send(); // 204 No Content is standard for successful deletions
+    res.status(204).send();
   } catch (err) {
     res.status(500).json({ message: 'Delete failed: ' + err.message });
   }
