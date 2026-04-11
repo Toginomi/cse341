@@ -1,11 +1,13 @@
-### --- LOCALHOST TESTS (STUDENTS) ---
+### --- LOCALHOST TESTS ---
+
+### LOGIN (Do this in browser: http://localhost:8080/login)
+GET http://localhost:8080/login
+
+### LOGOUT
+GET http://localhost:8080/logout
 
 ### GET ALL STUDENTS
 GET http://localhost:8080/students
-
-### GET STUDENT BY ID
-# Replace the ID below with a real ID from the MongoDB Compass
-GET http://localhost:8080/students/65f1a2b3c4d5e6f7a8b9c0d1
 
 ### CREATE STUDENT
 POST http://localhost:8080/students HTTP/1.1
@@ -22,50 +24,18 @@ Content-Type: application/json
     "totalCredits": 96
 }
 
-### UPDATE STUDENT
-# Replace the ID below with the ID returned from the POST request above
-PUT http://localhost:8080/students/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
-Content-Type: application/json
+---
 
-{
-    "firstName": "Rudy",
-    "lastName": "Pilande",
-    "email": "rpilande@newmail.edu",
-    "age": 24,
-    "major": "Software Engineering",
-    "gpa": 4.0,
-    "admissionDate": "2023-09-01",
-    "totalCredits": 102
-}
+### --- RENDER TESTS ---
 
-### DELETE STUDENT
-DELETE http://localhost:8080/students/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
-
-
-### --- LOCALHOST TESTS (COURSES) ---
-
-### GET ALL COURSES
-GET http://localhost:8080/courses
-
-### CREATE COURSE
-POST http://localhost:8080/courses HTTP/1.1
-Content-Type: application/json
-
-{
-    "courseCode": "CSE341",
-    "courseName": "Web Services",
-    "instructor": "Brother Snow",
-    "credits": 3
-}
-
-
-# --- RENDER LINKS (REPLACE WITH YOUR URL) ---
+### LOGIN (Do this in browser: https://students-project-wet9.onrender.com/login)
+GET https://students-project-wet9.onrender.com/login
 
 ### GET ALL STUDENTS (RENDER)
-GET https://your-new-app-name.onrender.com/students
+GET https://students-project-wet9.onrender.com/students
 
 ### CREATE STUDENT (RENDER)
-POST https://your-new-app-name.onrender.com/students HTTP/1.1
+POST https://students-project-wet9.onrender.com/students HTTP/1.1
 Content-Type: application/json
 
 {
@@ -78,3 +48,7 @@ Content-Type: application/json
     "admissionDate": "2024-01-01",
     "totalCredits": 15
 }
+
+### DELETE STUDENT (RENDER)
+# Replace with a real ID from your Render DB
+DELETE https://students-project-wet9.onrender.com/students/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
