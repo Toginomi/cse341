@@ -1,16 +1,23 @@
-### --- LOCALHOST TESTS ---
+### =============================================================
+### AUTHENTICATION
+### =============================================================
+### Login Local:  http://localhost:8080/login
+### Login Render: https://students-project-wet9.onrender.com/login
+### Logout:       https://students-project-wet9.onrender.com/logout
 
-### LOGIN (Do this in browser: http://localhost:8080/login)
-GET http://localhost:8080/login
 
-### LOGOUT
-GET http://localhost:8080/logout
+### =============================================================
+### STUDENTS COLLECTION
+### =============================================================
 
 ### GET ALL STUDENTS
-GET http://localhost:8080/students
+GET https://students-project-wet9.onrender.com/students
 
-### CREATE STUDENT
-POST http://localhost:8080/students HTTP/1.1
+### GET STUDENT BY ID (Replace {id} with a real MongoDB ID)
+GET https://students-project-wet9.onrender.com/students/65f1a2b3c4d5e6f7a8b9c0d1
+
+### CREATE STUDENT (Requires Login)
+POST https://students-project-wet9.onrender.com/students HTTP/1.1
 Content-Type: application/json
 
 {
@@ -24,31 +31,53 @@ Content-Type: application/json
     "totalCredits": 96
 }
 
----
-
-### --- RENDER TESTS ---
-
-### LOGIN (Do this in browser: https://students-project-wet9.onrender.com/login)
-GET https://students-project-wet9.onrender.com/login
-
-### GET ALL STUDENTS (RENDER)
-GET https://students-project-wet9.onrender.com/students
-
-### CREATE STUDENT (RENDER)
-POST https://students-project-wet9.onrender.com/students HTTP/1.1
+### UPDATE STUDENT (Requires Login)
+PUT https://students-project-wet9.onrender.com/students/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstName": "Scholar",
-    "lastName": "Test",
-    "email": "scholar@test.edu",
-    "age": 20,
-    "major": "Computer Science",
-    "gpa": 3.5,
-    "admissionDate": "2024-01-01",
-    "totalCredits": 15
+    "firstName": "Rudy",
+    "lastName": "Pilande",
+    "email": "updated@test.edu",
+    "age": 24,
+    "major": "Software Engineering",
+    "gpa": 4.0,
+    "admissionDate": "2023-09-01",
+    "totalCredits": 102
 }
 
-### DELETE STUDENT (RENDER)
-# Replace with a real ID from your Render DB
+### DELETE STUDENT (Requires Login)
 DELETE https://students-project-wet9.onrender.com/students/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+
+
+### =============================================================
+### COURSES COLLECTION
+### =============================================================
+
+### GET ALL COURSES
+GET https://students-project-wet9.onrender.com/courses
+
+### CREATE COURSE (Requires Login)
+POST https://students-project-wet9.onrender.com/courses HTTP/1.1
+Content-Type: application/json
+
+{
+    "courseCode": "CSE341",
+    "courseName": "Web Services",
+    "instructor": "Brother Snow",
+    "credits": 3
+}
+
+### UPDATE COURSE (Requires Login)
+PUT https://students-project-wet9.onrender.com/courses/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "courseCode": "CSE341",
+    "courseName": "Advanced Web Services",
+    "instructor": "Brother Rudy",
+    "credits": 4
+}
+
+### DELETE COURSE (Requires Login)
+DELETE https://students-project-wet9.onrender.com/courses/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
