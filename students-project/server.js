@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const session = require('express-session');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
 
 // Initialize environment variables
 dotenv.config();
@@ -11,8 +14,20 @@ const port = process.env.PORT || 8080;
 
 // Middleware setup
 app
-  .use(cors())
   .use(express.json())
+  // Session middleware
+  .use(
+    session({
+      secret: process.env.SESSION_SECRET || 'secret',
+      resave: false,
+      saveUninitialized: true
+    })
+  )
+  // Passport middleware
+  .use(passport.initialize())
+  .use(passport.session())
+  .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }))
+  .use(cors({ origin: '*' }))
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -23,6 +38,29 @@ app
     next();
   })
   .use('/', require('./routes'));
+
+// Passport Strategy Setup
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.CALLBACK_URL || "http://localhost:8080/github/callback"
+    },
+    function (accessToken, refreshToken, profile, done) {
+      // For this project, we just return the GitHub profile
+      return done(null, profile);
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 // Database Connection & Server Start
 mongoose
@@ -37,5 +75,5 @@ mongoose
   })
   .catch((err) => {
     console.error('*** DATABASE CONNECTION ERROR ***', err);
-    process.exit(1); // Stop the server if the DB fails
+    process.exit(1);
   });
