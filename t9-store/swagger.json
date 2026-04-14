@@ -5,7 +5,7 @@
     "description": "Final Project API for T9 Store - Managing Products, Reviews, Users, and Roles",
     "version": "1.0.0"
   },
-  "host": "t9-store-project.onrender.com",
+  "host": "t9-store.onrender.com",
   "basePath": "/",
   "schemes": [
     "https",
