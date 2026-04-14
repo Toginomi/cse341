@@ -1,0 +1,123 @@
+### =============================================================
+### AUTHENTICATION
+### =============================================================
+### Login Local:  http://localhost:8080/login
+### Login Render: https://t9-store-project.onrender.com/login
+### Logout:       https://t9-store-project.onrender.com/logout
+
+
+### =============================================================
+### PRODUCTS COLLECTION
+### =============================================================
+
+### GET ALL PRODUCTS
+GET https://t9-store-project.onrender.com/products
+
+### GET PRODUCT BY ID
+GET https://t9-store-project.onrender.com/products/65f1a2b3c4d5e6f7a8b9c0d1
+
+### CREATE PRODUCT (Requires Login)
+POST https://t9-store-project.onrender.com/products HTTP/1.1
+Content-Type: application/json
+
+{
+    "category": "Electronics",
+    "brand": "T9",
+    "model": "SuperTab 10",
+    "price": 299.99,
+    "stock": 50,
+    "description": "High-performance electronic tablet with 10-inch display.",
+    "warranty": "1 year",
+    "releaseDate": "2026-01-01"
+}
+
+### UPDATE PRODUCT (Requires Login)
+PUT https://t9-store-project.onrender.com/products/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "category": "Electronics",
+    "brand": "T9",
+    "model": "SuperTab 10 Pro Plus",
+    "price": 399.99,
+    "stock": 30,
+    "description": "Ultimate tablet with upgraded storage and battery.",
+    "warranty": "2 years",
+    "releaseDate": "2026-01-01"
+}
+
+### DELETE PRODUCT (Requires Login)
+DELETE https://t9-store-project.onrender.com/products/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+
+
+### =============================================================
+### REVIEWS COLLECTION
+### =============================================================
+
+### GET ALL REVIEWS
+GET https://t9-store-project.onrender.com/reviews
+
+### CREATE REVIEW (Requires Login)
+POST https://t9-store-project.onrender.com/reviews HTTP/1.1
+Content-Type: application/json
+
+{
+    "productId": "65f1a2b3c4d5e6f7a8b9c0d1",
+    "userId": "user_rudy_99",
+    "rating": 5,
+    "comment": "Incredible value for the price. Fast shipping!",
+    "date": "2026-04-15"
+}
+
+### UPDATE REVIEW (Requires Login)
+PUT https://t9-store-project.onrender.com/reviews/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "productId": "65f1a2b3c4d5e6f7a8b9c0d1",
+    "userId": "user_rudy_99",
+    "rating": 4,
+    "comment": "Actually, the battery life could be slightly better.",
+    "date": "2026-04-16"
+}
+
+### DELETE REVIEW (Requires Login)
+DELETE https://t9-store-project.onrender.com/reviews/65f1a2b3c4d5e6f7a8b9c0d1 HTTP/1.1
+
+
+### =============================================================
+### USERS COLLECTION
+### =============================================================
+
+### GET ALL USERS
+GET https://t9-store-project.onrender.com/users
+
+### CREATE USER (Requires Login)
+POST https://t9-store-project.onrender.com/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "rpilande2",
+    "email": "rpilande@t9store.com",
+    "password": "hashed_password_123",
+    "firstName": "Rudy",
+    "lastName": "Pilande"
+}
+
+
+### =============================================================
+### ROLES COLLECTION
+### =============================================================
+
+### GET ALL ROLES
+GET https://t9-store-project.onrender.com/roles
+
+### CREATE ROLE (Requires Login)
+POST https://t9-store-project.onrender.com/roles HTTP/1.1
+Content-Type: application/json
+
+{
+    "roleName": "Administrator",
+    "description": "Full access to all store management functions.",
+    "permissions": ["create_product", "delete_product", "manage_users"]
+}
